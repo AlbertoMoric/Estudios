@@ -11,3 +11,4 @@ import matplotlib.pyplot as plt
 
 file_path = 'StudentPerformanceFactors.csv'
 data = pd.read_csv(file_path)
+print ('holaaaa')
