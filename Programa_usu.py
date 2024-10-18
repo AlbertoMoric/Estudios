@@ -4,7 +4,7 @@ Created on Fri Oct 18 11:26:47 2024
 
 @author: 2425BIGDATA408
 """
-
+pip install seaborn
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
