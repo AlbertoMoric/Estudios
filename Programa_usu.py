@@ -31,3 +31,21 @@ HeatMap(heat_data).add_to(m)
 # Mostrar el mapa en Streamlit
 st.title("Mapa de Calor de Universidades")
 st_folium(m, width=700, height=500)
+
+# Agregar la columna 'Id'
+df_limpio['Id'] = range(1, len(df_limpio) + 1)
+
+# Cargar nombres de hombres y mujeres desde archivos de texto
+nombres_hombres_df = pd.read_csv('names/male.txt', header=None)
+nombres_mujeres_df = pd.read_csv('names/female.txt', header=None)
+
+# Agregar una columna 'Id' a ambos DataFrames
+nombres_hombres_df['Id'] = range(1, len(nombres_hombres_df) + 1)
+nombres_mujeres_df['Id'] = range(1, len(nombres_mujeres_df) + 1)
+
+# Renombrar la columna 0 a 'Nombre' en ambos DataFrames
+nombres_hombres_df.rename(columns={0: 'Nombre'}, inplace=True)
+nombres_mujeres_df.rename(columns={0: 'Nombre'}, inplace=True)
+
+# Crear una columna 'Nombre' vacía en df_limpio
+df_limpio['Nombre'] = ''
