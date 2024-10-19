@@ -12,7 +12,7 @@ st.title("Análisis de Factores de Rendimiento Estudiantil")
 file_path = 'StudentPerformanceFactors.csv'
 data = pd.read_csv(file_path)
 
-# Intentar cargar el archivo CSV
+#Empieza el programa
 try:
     data = pd.read_csv(file_path)
     
@@ -22,6 +22,11 @@ try:
     # Mostrar el DataFrame limpio en la aplicación
     st.subheader("DataFrame limpio")
     st.write(df_limpio)
+    
+    # Mostrar un resumen estadístico de los datos
+    st.subheader("Resumen estadístico de los datos")
+    resumen = df_limpio.describe()
+    st.write(resumen)
     
     # Visualización básica con Seaborn y Matplotlib
     st.subheader("Visualización de datos")
