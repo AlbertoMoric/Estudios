@@ -18,4 +18,15 @@ st.subheader('Vista previa de los datos')
 st.write(data.head())
 
 # Mostrar información sobre el DataFrame
-st.subheader('Información del conjunto d
+st.subheader('Información del conjunto de datos')  # Aquí estaba el error, ahora está cerrado correctamente
+st.write(data.describe())
+
+# Seleccionar solo las columnas numéricas para la matriz de correlación
+numerical_columns = data.select_dtypes(include=['int64', 'float64']).columns
+
+# Calcular la matriz de correlación
+correlation_matrix = data[numerical_columns].corr()
+
+# Visualizar la matriz de correlación con Matplotlib y Streamlit
+plt.figure(figsize=(10, 6))  # Ajuste del tamaño para una mejor visualiza
+
