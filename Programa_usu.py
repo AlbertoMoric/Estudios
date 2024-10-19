@@ -55,3 +55,5 @@ df_limpio = pd.merge(df_limpio, nombres_mujeres_df[['Id', 'Nombre']], on='Id', h
 
 df_limpio.loc[df_limpio['Gender'] == 'Male', 'Nombre'] = df_limpio['Nombre_hombre']
 df_limpio.loc[df_limpio['Gender'] == 'Female', 'Nombre'] = df_limpio['Nombre_mujer']
+
+df_limpio.drop(columns=['Nombre_hombre', 'Nombre_mujer'], inplace=True)
