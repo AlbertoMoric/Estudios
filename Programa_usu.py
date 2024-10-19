@@ -1,3 +1,5 @@
+pip install streamlit-folium
+
 import streamlit as st
 import pandas as pd
 import seaborn as sns
