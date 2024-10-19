@@ -6,9 +6,6 @@ import folium
 from folium.plugins import HeatMap
 from streamlit_folium import st_folium  # Asegúrate de instalar esta biblioteca
 
-# Título de la aplicación
-st.title("Programa Analizador de Datos")
-
 # Cargar el archivo CSV
 file_path = 'StudentPerformanceFactors.csv'
 data = pd.read_csv(file_path)
