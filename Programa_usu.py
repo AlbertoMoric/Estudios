@@ -12,9 +12,6 @@ data = pd.read_csv(file_path)
 df2 = pd.read_csv('datos_universidades.csv')
 df_limpio = data.dropna()
 
-# Instala la biblioteca streamlit_folium si aún no la tienes
-# pip install streamlit-folium
-
 # Crear el mapa
 m = folium.Map(location=[37.0902, -95.7129], zoom_start=4)
 
@@ -54,16 +51,6 @@ df_limpio.loc[df_limpio['Gender'] == 'Male', 'Nombre'] = df_limpio['Nombre_hombr
 df_limpio.loc[df_limpio['Gender'] == 'Female', 'Nombre'] = df_limpio['Nombre_mujer']
 
 df_limpio.drop(columns=['Nombre_hombre', 'Nombre_mujer'], inplace=True)
-
-import streamlit as st
-import pandas as pd
-import folium
-from folium.plugins import HeatMap
-import streamlit.components.v1 as components
-
-# Cargar tus DataFrames (asegúrate de que df_limpio y df2 estén definidos)
-# df_limpio = pd.read_csv('tu_archivo.csv')
-# df2 = pd.read_csv('datos_universidades.csv')
 
 def buscar_universidades():
     st.title("Sistema de Búsqueda de Universidades")
