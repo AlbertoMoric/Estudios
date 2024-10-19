@@ -27,7 +27,7 @@ try:
     st.subheader("Resumen estadístico de los datos")
     resumen = df_limpio.describe()
     st.write(resumen)
-    
+
     # Seleccionar la columna para graficar
     st.subheader("Selecciona una columna para graficar")
     columnas_numericas = df_limpio.select_dtypes(include='number').columns.tolist()
@@ -41,8 +41,25 @@ try:
         fig, ax = plt.subplots()
         sns.histplot(df_limpio[columna_seleccionada], ax=ax, kde=True)  # Gráfico de histograma con KDE
         st.pyplot(fig)
-    else:
-        st.write("No hay columnas numéricas para graficar.")
-        
+    
+    # Calcular y visualizar la matriz de correlación
+    st.subheader("Matriz de correlación")
+    
+    # Seleccionar solo las columnas numéricas para la matriz de correlación
+    numerical_columns = df_limpio.select_dtypes(include=['int64', 'float64']).columns
+
+    # Calcular la matriz de correlación
+    correlation_matrix = df_limpio[numerical_columns].corr()
+
+    # Visualizar la matriz de correlación
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5, ax=ax)
+    plt.title('Matriz de Correlación de Columnas Numéricas')
+    st.pyplot(fig)
+
+    # Mostrar la matriz de correlación como tabla
+    st.subheader("Tabla de la matriz de correlación")
+    st.write(correlation_matrix)
+
 except FileNotFoundError:
     st.error(f"No se encontró el archivo en la ruta especificada: {file_path}")
