@@ -8,8 +8,9 @@ st.title("Programa Analizador de Datos")
 
 st.title("Análisis de Factores de Rendimiento Estudiantil")
 
-# Ruta del archivo CSV (asegúrate de que esté disponible en tu sistema)
-file_path = '/content/drive/MyDrive/Colab Notebooks/Examen/StudentPerformanceFactors.csv'
+# Cargar el archivo CSV
+file_path = 'StudentPerformanceFactors.csv'
+data = pd.read_csv(file_path)
 
 # Intentar cargar el archivo CSV
 try:
