@@ -57,3 +57,56 @@ df_limpio.loc[df_limpio['Gender'] == 'Male', 'Nombre'] = df_limpio['Nombre_hombr
 df_limpio.loc[df_limpio['Gender'] == 'Female', 'Nombre'] = df_limpio['Nombre_mujer']
 
 df_limpio.drop(columns=['Nombre_hombre', 'Nombre_mujer'], inplace=True)
+
+import streamlit as st
+import pandas as pd
+import folium
+from folium.plugins import HeatMap
+import streamlit.components.v1 as components
+
+# Cargar tus DataFrames (asegúrate de que df_limpio y df2 estén definidos)
+# df_limpio = pd.read_csv('tu_archivo.csv')
+# df2 = pd.read_csv('datos_universidades.csv')
+
+def buscar_universidades():
+    st.title("Sistema de Búsqueda de Universidades")
+    st.write("--------------------------------------------------")
+    
+    # Obtener el nombre del alumnado a través de un input
+    alumno = st.text_input("Inserte el nombre del alumnado:")
+    
+    if alumno:
+        if alumno not in df_limpio['Nombre'].values:
+            st.warning("El alumno no se encuentra en la base de datos")
+            return
+
+        nota_alumno = df_limpio['Exam_Score'][df_limpio['Nombre'] == alumno].values[0]
+        st.write(f"El alumno {alumno} tiene una nota de {nota_alumno}")
+
+        buscar_unis = []
+        for index, row in df2.iterrows():
+            if row['Nota_corte'] <= nota_alumno:
+                buscar_unis.append(row)
+
+        if not buscar_unis:
+            st.warning("No hay universidades disponibles con la nota de corte requerida.")
+            return
+
+        # Crear el mapa
+        mapa = folium.Map(location=[37.0902, -95.7129], zoom_start=4)
+        
+        # Añadir marcadores de universidades al mapa
+        for uni in buscar_unis:
+            folium.Marker(
+                location=[uni['Latitud'], uni['Longitud']],
+                popup=uni['Universidad'],
+                icon=folium.Icon(color='blue')
+            ).add_to(mapa)
+
+        # Mostrar el mapa en Streamlit
+        folium_map = mapa._repr_html_()  # Convertir el mapa a HTML
+        components.html(folium_map, width=700, height=500)  # Mostrar el mapa en Streamlit
+
+# Llamar a la función en la aplicación Streamlit
+if __name__ == "__main__":
+    buscar_universidades()
