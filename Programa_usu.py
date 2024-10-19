@@ -92,5 +92,5 @@ def buscar_universidades():
         components.html(folium_map, width=700, height=500)  # Mostrar el mapa en Streamlit
 
 # Llamar a la función en la aplicación Streamlit
-  if __name__ == "__main__":
+if __name__ == "__main__":
     buscar_universidades()
