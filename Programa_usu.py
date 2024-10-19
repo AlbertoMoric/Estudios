@@ -8,13 +8,12 @@ st.title("Programa Analizador de Datos")
 
 st.title("Análisis de Factores de Rendimiento Estudiantil")
 
-# Cargar el archivo CSV usando Streamlit
-uploaded_file = st.file_uploader("Sube el archivo CSV", type="csv")
+# Ruta del archivo CSV (asegúrate de que esté disponible en tu sistema)
+file_path = '/content/drive/MyDrive/Colab Notebooks/Examen/StudentPerformanceFactors.csv'
 
-# Verificar si se ha subido un archivo
-if uploaded_file is not None:
-    # Cargar el archivo CSV en un DataFrame
-    data = pd.read_csv(uploaded_file)
+# Intentar cargar el archivo CSV
+try:
+    data = pd.read_csv(file_path)
     
     # Limpiar el DataFrame eliminando valores nulos
     df_limpio = data.dropna()
@@ -33,5 +32,5 @@ if uploaded_file is not None:
         st.pyplot(fig)
     else:
         st.write("No hay columnas numéricas para graficar.")
-else:
-    st.write("Por favor, sube un archivo CSV para continuar.")
+except FileNotFoundError:
+    st.error(f"No se encontró el archivo en la ruta especificada: {file_path}")
