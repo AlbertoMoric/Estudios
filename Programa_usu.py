@@ -46,3 +46,9 @@ nombres_mujeres_df.rename(columns={0: 'Nombre'}, inplace=True)
 
 # Crear una columna 'Nombre' vacía en df_limpio
 df_limpio['Nombre'] = ''
+
+# Realizar la fusión de df_limpio con nombres_hombres_df
+df_limpio = pd.merge(df_limpio, nombres_hombres_df[['Id', 'Nombre']], on='Id', how='left', suffixes=('', '_hombre'))
+
+# Realizar la fusión de df_limpio con nombres_mujeres_df
+df_limpio = pd.merge(df_limpio, nombres_mujeres_df[['Id', 'Nombre']], on='Id', how='left', suffixes=('', '_mujer'))
