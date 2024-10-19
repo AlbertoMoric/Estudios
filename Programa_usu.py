@@ -12,11 +12,8 @@ st.title("Programa Analizador de Datos")
 # Cargar el archivo CSV
 file_path = 'StudentPerformanceFactors.csv'
 data = pd.read_csv(file_path)
-
-# Cargar el archivo CSV
-file_path = 'StudentPerformanceFactors.csv'
-data = pd.read_csv(file_path)
 df2 = pd.read_csv('datos_universidades.csv')
+df_limpio = data.dropna()
 
 # Instala la biblioteca streamlit_folium si aún no la tienes
 # pip install streamlit-folium
