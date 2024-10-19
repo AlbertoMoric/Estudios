@@ -23,17 +23,26 @@ st.write(data.head())
 st.subheader('Información del conjunto de datos')
 st.write(data.describe())
 
+import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+# Suponiendo que df_limpio ya esté cargado como DataFrame
+
 # Seleccionar solo las columnas numéricas para la matriz de correlación
 numerical_columns = df_limpio.select_dtypes(include=['int64', 'float64']).columns
 
 # Calcular la matriz de correlación
 correlation_matrix = df_limpio[numerical_columns].corr()
 
-# Visualizar la matriz de correlación
+# Visualizar la matriz de correlación con Matplotlib y Streamlit
 plt.figure(figsize=(6, 3))
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
 plt.title('Correlation Matrix for Numerical Columns')
-plt.show()
 
-# Mostrar la matriz de correlación como tabla
-print(correlation_matrix)
+# Usar st.pyplot() para mostrar la figura en Streamlit
+st.pyplot(plt.gcf())  # plt.gcf() obtiene la figura actual
+
+# Mostrar la matriz de correlación como tabla con st.dataframe()
+st.dataframe(correlation_matrix)
