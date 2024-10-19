@@ -3,6 +3,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import folium
+import streamlit.components.v1 as components
 from folium.plugins import HeatMap
 from streamlit_folium import st_folium  # Asegúrate de instalar esta biblioteca
 
