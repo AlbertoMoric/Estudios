@@ -1,26 +1,3 @@
-import streamlit as st
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# Título de la aplicación
-st.title('Análisis de Factores de Rendimiento Estudiantil')
-
-# Subtítulo
-st.write('Este es un análisis exploratorio utilizando datos del rendimiento estudiantil.')
-
-# Cargar el archivo CSV
-file_path = 'StudentPerformanceFactors.csv'
-data = pd.read_csv(file_path)
-
-# Mostrar los primeros registros del DataFrame
-st.subheader('Vista previa de los datos')
-st.write(data.head())
-
-# Mostrar información sobre el DataFrame
-st.subheader('Información del conjunto de datos')  # Aquí estaba el error, ahora está cerrado correctamente
-st.write(data.describe())
-
 # Seleccionar solo las columnas numéricas para la matriz de correlación
 numerical_columns = data.select_dtypes(include=['int64', 'float64']).columns
 
@@ -28,5 +5,13 @@ numerical_columns = data.select_dtypes(include=['int64', 'float64']).columns
 correlation_matrix = data[numerical_columns].corr()
 
 # Visualizar la matriz de correlación con Matplotlib y Streamlit
-plt.figure(figsize=(10, 6))  # Ajuste del tamaño para una mejor visualiza
+plt.figure(figsize=(10, 6))  # Ajuste del tamaño para una mejor visualización en Streamlit
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title('Matriz de Correlación de las Columnas Numéricas')
 
+# Usar st.pyplot() para mostrar la figura en Streamlit
+st.pyplot(plt.gcf())  # plt.gcf() obtiene la figura actual
+
+# Mostrar la matriz de correlación como tabla con st.dataframe()
+st.subheader('Matriz de Correlación como Tabla')
+st.dataframe(correlation_matrix)
